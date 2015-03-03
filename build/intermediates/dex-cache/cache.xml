@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/sudhanshu/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-8ea45bad8b13f9a77fbe416d20bb96f0272b6913.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/libs/Parse-1.8.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c2cb0bfe37cbefd855b6faa3c9a5be833aba7300">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/Parse-1.8.2-1d18a6e8f8f0d8d5b2e0d81a7f8130aa4ba35141.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/classes-4020c7e2e6a30c22fe781e4e50b01834b0f02638.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.4/129874135e6081269ace2312092031558865de12/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-eb60c5aae16f6f4cd77c8550383aa64b1e670b76.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-5a85876fa2a3e3615aee040d919555b9387642e7.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/classes-cec3a08f71067a9efbd18f9044ab3394f30a538f.jar" />
+    </item>
+
+</items>
