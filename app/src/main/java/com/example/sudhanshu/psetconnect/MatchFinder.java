@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class MatchFinder {
 
-    private List <String> findAMatchForSizeTwo (List<RequestForGroup> listOfRequests) throws MatchNotFoundException{
+    public List <String> findAMatchForSizeTwo (List<RequestForGroup> listOfRequests) throws MatchNotFoundException{
 
     List<String> matchFormed = new ArrayList<String>();
 
