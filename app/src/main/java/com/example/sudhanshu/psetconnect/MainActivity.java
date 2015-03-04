@@ -28,8 +28,6 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-
-
     private final List<String> listOfAllClasses = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6","7" ,"8","9","10","11", "12", "13", "14", "15", "16", "17","18", "19", "20", "21", "21A", "21F", "21H", "21L", "21M","21W", "22", "AS", "CC", "CDO",  "CMS", "CSB" ,"ES","EC", "ESD","HST", "MS", "MAS", "NS", "OR",  "RED", "SDM", "SP","STS","WGS"));
     private ArrayAdapter<String> arrayAdapterForAllClasses;
     ArrayAdapter<String> arrayAdapterForSubClasses;
@@ -39,14 +37,15 @@ public class MainActivity extends ActionBarActivity {
     private TextView tv;
     private Button button;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "LUlLqUhNCfFo1MdBYJ6qHkIQKUGrsdMarZrqaT8l", "4EBHWdRqwmpelaBHHC053aNlWCPLHq1jHnAsIFN7");
 
 
         listViewForClass = (ListView) findViewById(R.id.listView);
@@ -70,25 +69,19 @@ public class MainActivity extends ActionBarActivity {
                 listViewForSubClass.setAdapter(arrayAdapterForSubClasses);
             }
 
-
         });
 
         listViewForSubClass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Parse.enableLocalDatastore(MainActivity.this);
-                Parse.initialize(MainActivity.this, "LUlLqUhNCfFo1MdBYJ6qHkIQKUGrsdMarZrqaT8l", "4EBHWdRqwmpelaBHHC053aNlWCPLHq1jHnAsIFN7");
-
-                ParseObject testObject = new ParseObject("NewObject");
+                ParseObject testObject = new ParseObject("TestObject");
                 testObject.put("foo", "bar");
                 testObject.put("userID", "bar");
-                testObject.put("objectId", "snmishra");
                 testObject.saveInBackground();
 
                 Toast.makeText(MainActivity.this,"Sent to Cloud",Toast.LENGTH_LONG).show();
             }
-
 
         });
 
@@ -115,7 +108,6 @@ public class MainActivity extends ActionBarActivity {
                 // TODO Auto-generated method stub
             }
         });
-
     }
 
 
