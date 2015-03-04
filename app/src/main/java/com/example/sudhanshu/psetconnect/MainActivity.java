@@ -1,5 +1,6 @@
 package com.example.sudhanshu.psetconnect;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-    private final List<String> listOfAllClasses = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6","7" ,"8","9","10","11", "12", "13", "14", "15", "16", "17","18", "19", "20", "21", "21A", "21F", "21H", "21L", "21M","21W", "22", "AS", "CC", "CDO",  "CMS", "CSB" ,"ES","EC", "ESD","HST", "MS", "MAS", "NS", "OR",  "RED", "SDM", "SP","STS","WGS"));
+    private final List<String> listOfAllClasses = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "21A", "21F", "21H", "21L", "21M", "21W", "22", "AS", "CC", "CDO", "CMS", "CSB", "ES", "EC", "ESD", "HST", "MS", "MAS", "NS", "OR", "RED", "SDM", "SP", "STS", "WGS"));
     private ArrayAdapter<String> arrayAdapterForAllClasses;
     ArrayAdapter<String> arrayAdapterForSubClasses;
     private ListView listViewForClass;
@@ -44,9 +46,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "LUlLqUhNCfFo1MdBYJ6qHkIQKUGrsdMarZrqaT8l", "4EBHWdRqwmpelaBHHC053aNlWCPLHq1jHnAsIFN7");
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            loadLoginView();
+        }
 
 
         listViewForClass = (ListView) findViewById(R.id.listView);
@@ -64,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
                 String fileName = listViewForClass.getItemAtPosition(position).toString();
 
                 fileName = fileName.concat(".txt");
-                List <String> listOfSubClasses = TextParser.textParserForSubClasses(getApplicationContext(),fileName);
+                List<String> listOfSubClasses = TextParser.textParserForSubClasses(getApplicationContext(), fileName);
 
                 arrayAdapterForSubClasses = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, listOfSubClasses);
                 listViewForSubClass.setAdapter(arrayAdapterForSubClasses);
@@ -81,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
                 testObject.put("UserID", "test@mit.edu");
                 testObject.saveInBackground();
                 Log.i("PARSE ", "Sent to Parse!!");
-                Toast.makeText(MainActivity.this,"Sent to Cloud",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Sent to Cloud", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -111,7 +115,12 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-
+    private void loadLoginView() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -126,12 +135,9 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
