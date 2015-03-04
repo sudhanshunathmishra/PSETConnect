@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,10 +77,10 @@ public class MainActivity extends ActionBarActivity {
                                     int position, long id) {
 
                 ParseObject testObject = new ParseObject("TestObject");
-                testObject.put("foo", "bar");
-                testObject.put("userID", "bar");
+                testObject.put("GroupSize", listViewForSubClass.getItemAtPosition(position));
+                testObject.put("UserID", "test@mit.edu");
                 testObject.saveInBackground();
-
+                Log.i("PARSE ", "Sent to Parse!!");
                 Toast.makeText(MainActivity.this,"Sent to Cloud",Toast.LENGTH_LONG).show();
             }
 
