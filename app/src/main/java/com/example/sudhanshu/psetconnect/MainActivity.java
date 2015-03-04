@@ -65,7 +65,6 @@ public class MainActivity extends ActionBarActivity {
 
                 fileName = fileName.concat(".txt");
                 List <String> listOfSubClasses = TextParser.textParserForSubClasses(getApplicationContext(),fileName);
-                Collections.reverse(listOfSubClasses);
 
                 arrayAdapterForSubClasses = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, listOfSubClasses);
                 listViewForSubClass.setAdapter(arrayAdapterForSubClasses);
