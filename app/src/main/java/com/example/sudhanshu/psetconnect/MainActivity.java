@@ -71,8 +71,8 @@ public class MainActivity extends ActionBarActivity {
 
 
         listViewForClass = (ListView) findViewById(R.id.listView);
-        listViewForSubClass = (ListView) findViewById(R.id.listView2);
-        button = (Button) findViewById(R.id.button);
+        listViewForSubClass = (b jghListView) findViewById(R.id.listView2);
+        //button = (Button) findViewById(R.id.button);
         backButton = (Button)findViewById(R.id.button4);
         logout =  (Button) findViewById(R.id.button2);
 
