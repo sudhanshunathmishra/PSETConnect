@@ -13,13 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseUser;
 
 import com.parse.ParseException;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class Login extends ActionBarActivity {
 
     protected EditText usernameEditText;
     protected EditText passwordEditText;
@@ -42,7 +41,7 @@ public class LoginActivity extends ActionBarActivity {
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(Login.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +56,7 @@ public class LoginActivity extends ActionBarActivity {
                 password = password.trim();
 
                 if (username.isEmpty() || password.isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                     builder.setMessage(R.string.login_error_message)
                             .setTitle(R.string.login_error_title)
                             .setPositiveButton(android.R.string.ok, null);
@@ -74,13 +73,13 @@ public class LoginActivity extends ActionBarActivity {
 
                             if (e == null) {
                                 // Success!
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(Login.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else {
                                 // Fail
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                                 builder.setMessage(e.getMessage())
                                         .setTitle(R.string.login_error_title)
                                         .setPositiveButton(android.R.string.ok, null);

@@ -18,5 +18,6 @@
     <string name="sign_up_text">Sign Up!</string>
     <string name="logout_label">Logout</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_not_verified">NotVerified</string>
 
 </resources>

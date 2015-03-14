@@ -5,6 +5,7 @@ package com.example.sudhanshu.psetconnect;
  */
 
     import com.parse.Parse;
+    import com.parse.ParseObject;
     import com.parse.ParseUser;
 
     public class Application extends android.app.Application {
@@ -13,6 +14,7 @@ package com.example.sudhanshu.psetconnect;
             Parse.enableLocalDatastore(this);
 
             Parse.initialize(this, "LUlLqUhNCfFo1MdBYJ6qHkIQKUGrsdMarZrqaT8l", "4EBHWdRqwmpelaBHHC053aNlWCPLHq1jHnAsIFN7");
+
         }
 
     }

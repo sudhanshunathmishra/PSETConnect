@@ -22,7 +22,6 @@ public class SignUpActivity extends ActionBarActivity {
 
     protected EditText usernameEditText;
     protected EditText passwordEditText;
-    protected EditText emailEditText;
     protected Button signUpButton;
 
     @Override
@@ -33,7 +32,7 @@ public class SignUpActivity extends ActionBarActivity {
 
         usernameEditText = (EditText)findViewById(R.id.usernameField);
         passwordEditText = (EditText)findViewById(R.id.passwordField);
-        emailEditText = (EditText)findViewById(R.id.emailField);
+
         signUpButton = (Button)findViewById(R.id.signupButton);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -41,13 +40,19 @@ public class SignUpActivity extends ActionBarActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                String email = emailEditText.getText().toString();
+                String email = usernameEditText.getText().toString().concat("@mit.edu");
 
                 username = username.trim();
                 password = password.trim();
                 email = email.trim();
 
-                if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+                if (username.endsWith("@mit.edu")){
+                    email = username;
+                    username = username.substring(0,username.lastIndexOf("@"));
+
+                }
+
+                if (username.contains("@")||username.isEmpty() || password.isEmpty() || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setMessage(R.string.signup_error_message)
                             .setTitle(R.string.signup_error_title)

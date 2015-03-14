@@ -6,16 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity" >
+    tools:context=".LoginActivity"
+    android:textAlignment="viewStart"
+    android:touchscreenBlocksFocus="true">
 
     <EditText
         android:id="@+id/usernameField"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="Username">
+        android:hint="Enter Your Kerberos">
 
         <requestFocus />
     </EditText>
@@ -27,7 +29,7 @@
         android:layout_alignLeft="@+id/usernameField"
         android:layout_below="@+id/usernameField"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Enter Your Password"
         android:inputType="textPassword" />
 
     <Button
@@ -42,9 +44,20 @@
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Don&apos;t Have An Account? Sign up!"
+        android:textSize="15dp"
         android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp"
-        android:text="Sign up" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="\@mit.edu"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/passwordField"
+        android:layout_toRightOf="@+id/usernameField"
+        android:layout_toEndOf="@+id/usernameField"
+        android:textSize="24dp" />
 
 </RelativeLayout>
