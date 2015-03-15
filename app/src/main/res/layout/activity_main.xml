@@ -6,19 +6,9 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/logout">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/listView"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_above="@+id/button2" />
-
     <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="2sp"
         android:id="@+id/editText"
         android:hint="Search"
         android:visibility="invisible"
@@ -27,38 +17,51 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/listView2"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:orientation="horizontal"
         android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignRight="@+id/listView"
-        android:visibility="invisible"
-        android:textAlignment="gravity"
-        android:layout_above="@+id/button2" />
+        android:layout_above="@+id/button2">
 
+        <ListView
+            android:id="@+id/booksLV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.09"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/gray"
+            android:dividerHeight="1px"
+            android:paddingRight="4dip" >
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/sideIndex"
+            android:layout_width="30dip"
+            android:layout_height="fill_parent"
+            android:background="@drawable/custom_layout"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/selectedIndex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/blue"
+        android:textSize="35dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Logout"
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/button4"
-        android:layout_alignBottom="@+id/editText"
-        android:layout_toRightOf="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView"
-        android:visibility="invisible" />
 
 </RelativeLayout>

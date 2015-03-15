@@ -33,8 +33,6 @@ public class TextParser {
                 line = bReader.readLine();
             }
             bReader.close();
-            for (String v : listOfSubClasses)
-                Log.i("Array is ", v);
 
         } catch (IOException e) {
             e.printStackTrace();

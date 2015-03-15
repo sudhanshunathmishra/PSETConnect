@@ -1,42 +1,28 @@
 package com.example.sudhanshu.psetconnect;
 
-import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParsePush;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends CustomListIndex {
 
-    private final List<String> listOfAllClasses = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "15", "16", "17", "18", "20", "21", "21A", "21F", "21H", "21L", "21M", "21W", "22", "AS", "CC", "CDO", "CMS", "CSB", "ES", "EC", "ESD", "HST", "MS", "MAS", "NS", "OR", "RED", "SDM", "SP", "STS", "WGS"));
+    private final ArrayList<String> listOfAllClasses = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "15", "16", "17", "18", "20", "21", "21A", "21F", "21H", "21L", "21M", "21W", "22", "AS", "CC", "CDO", "CMS", "CSB", "ES", "EC", "ESD", "HST", "MS", "MAS", "NS", "OR", "RED", "SDM", "SP", "STS", "WGS"));
     private ArrayAdapter<String> arrayAdapterForAllClasses;
     private ArrayAdapter<String> arrayAdapterForSubClasses;
     private ListView listViewForClass;
@@ -48,10 +34,34 @@ public class MainActivity extends ActionBarActivity {
     private  Button logout;
 
 
+
+
+    private ListView booksLV;
+
+    private UserListAdapter userListAdapter;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        booksLV = (ListView)findViewById(R.id.booksLV);
+        selectedIndex = (TextView) findViewById(R.id.selectedIndex);
+        allClasses = TextParser.textParserForSubClasses(getApplicationContext(), "SP15.txt");
+
+        ArrayList<String> subsidiesList = getIndexedBooks(allClasses);
+        totalListSize = subsidiesList.size();
+
+        userListAdapter = new UserListAdapter(this, subsidiesList);
+        booksLV.setAdapter(userListAdapter);
+
+        LinearLayout sideIndex = (LinearLayout) findViewById(R.id.sideIndex);
+        sideIndex.setOnClickListener(onClicked);
+        sideIndexHeight = sideIndex.getHeight();
+        mGestureDetector = new GestureDetector(this,
+                new ListIndexGestureListener());
+
 
         // Enable Local Datastore.
 
@@ -69,9 +79,9 @@ public class MainActivity extends ActionBarActivity {
            };
         }
 
-
+        /*
         listViewForClass = (ListView) findViewById(R.id.listView);
-        listViewForSubClass = (b jghListView) findViewById(R.id.listView2);
+        listViewForSubClass = (ListView) findViewById(R.id.listView2);
         //button = (Button) findViewById(R.id.button);
         backButton = (Button)findViewById(R.id.button4);
         logout =  (Button) findViewById(R.id.button2);
@@ -217,8 +227,70 @@ public class MainActivity extends ActionBarActivity {
                 // TODO Auto-generated method stub
             }
         });
+    */
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        getDisplayListOnChange();
+    }
 
 
+    private ArrayList<String> getIndexedBooks(
+            List<String> booksVector) {
+
+        //Retrieve it from DB in shorting order
+
+        ArrayList<String> v = new ArrayList<String>();
+        //Add default item
+
+        String idx1 = null;
+        String idx2 = null;
+        for (int i = 0; i < booksVector.size(); i++) {
+            String temp = booksVector.get(i);
+            //Insert the alphabets
+            idx1 = (temp.substring(0, temp.indexOf("."))).toLowerCase();
+            if(!idx1.equalsIgnoreCase(idx2))
+            {
+                v.add(idx1.toUpperCase());
+                idx2 = idx1;
+                dealList.add(i);
+            }
+            v.add(temp);
+        }
+
+        return v;
+    }
+
+    /**
+     * ListIndexGestureListener method gets the list on scroll.
+     */
+    private class ListIndexGestureListener extends
+            GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                                float distanceX, float distanceY) {
+
+            /**
+             * we know already coordinates of first touch we know as well a
+             * scroll distance
+             */
+            sideIndexX = sideIndexX - distanceX;
+            sideIndexY = sideIndexY - distanceY;
+
+            /**
+             * when the user scrolls within our side index, we can show for
+             * every position in it a proper item in the list
+             */
+            if (sideIndexX >= 0 && sideIndexY >= 0) {
+                displayListItem();
+            }
+
+            return super.onScroll(e1, e2, distanceX, distanceY);
+        }
     }
 
     private void loadLoginView() {
