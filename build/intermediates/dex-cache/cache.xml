@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/sudhanshu/Desktop/PSETConnect/app/libs/Parse-1.8.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c2cb0bfe37cbefd855b6faa3c9a5be833aba7300">
-        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/Parse-1.8.2-1d18a6e8f8f0d8d5b2e0d81a7f8130aa4ba35141.jar" />
-    </item>
-    <item
         jar="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -42,6 +35,20 @@
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
         <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-5a85876fa2a3e3615aee040d919555b9387642e7.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/libs/Parse-1.8.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c2cb0bfe37cbefd855b6faa3c9a5be833aba7300">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/Parse-1.8.2-1d18a6e8f8f0d8d5b2e0d81a7f8130aa4ba35141.jar" />
+    </item>
+    <item
+        jar="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="/Users/sudhanshu/Desktop/PSETConnect/app/build/intermediates/pre-dexed/debug/classes-41c48960aed8488904348cc89c64a0f578a60fcd.jar" />
     </item>
 
 </items>

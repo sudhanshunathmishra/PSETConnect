@@ -20,7 +20,9 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserListAdapter extends BaseAdapter {
 
@@ -113,12 +115,13 @@ public class UserListAdapter extends BaseAdapter {
                                         int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
                                         final int groupSize = Integer.parseInt(((AlertDialog) dialog).getListView().getItemAtPosition(selectedPosition).toString());
                                         final String emailId = ParseUser.getCurrentUser().getEmail();
+                                        final String matches = "Still Searching";
                                         HashMap<String, Object> params = new HashMap<String, Object>();
 
                                         params.put("Class", mitClass);
                                         params.put("GroupSize", groupSize);
                                         params.put("UserID", emailId);
-                                        params.put("Matched", "" );
+                                        params.put("Matches", matches);
 
                                         ParseCloud.callFunctionInBackground("Delete", params, new FunctionCallback<String>() {
                                             public void done(String result, ParseException e) {
@@ -127,18 +130,12 @@ public class UserListAdapter extends BaseAdapter {
                                                     testObject.put("UserID", emailId);
                                                     testObject.put("Class", mitClass);
                                                     testObject.put("GroupSize", groupSize);
-                                                    testObject.put("Matched", "");
+                                                    testObject.put("Matches", matches);
                                                     testObject.saveInBackground();
                                                     Log.i("PARSE ", "Sent to Parse!!");
                                                 }
                                             }
                                         });
-
-
-
-
-
-
 
 
                                         Toast.makeText(activity, "Requested Group Size " + groupSize + " For Class " + mitClass, Toast.LENGTH_LONG).show();
