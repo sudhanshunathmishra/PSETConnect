@@ -175,8 +175,18 @@ public class CustomListIndex extends Activity {
 		String[] strArr = new String[allClasses.size()];
 
 		int j = 0;
+        boolean letters = false;
 		for (String aClass : allClasses) {
-			strArr[j++] = aClass.substring(0, aClass.indexOf("."));
+            if (aClass.startsWith("A") && !letters) {
+                letters = true;
+                strArr[j++] = "A-Z";
+            } else if (letters) {
+                strArr[j++] = "A-Z";
+            } else if (aClass.startsWith("21")) {
+                strArr[j++] = "21";
+            } else {
+                strArr[j++] = aClass.substring(0, aClass.indexOf("."));
+            }
 		}
 
 		indexList = getListArrayIndex(strArr);
