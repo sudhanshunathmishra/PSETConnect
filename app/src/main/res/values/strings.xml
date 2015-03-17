@@ -19,5 +19,6 @@
     <string name="logout_label">Logout</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_not_verified">NotVerified</string>
+    <string name="title_activity_result">ResultActivity</string>
 
 </resources>

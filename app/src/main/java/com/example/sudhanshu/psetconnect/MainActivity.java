@@ -2,10 +2,12 @@ package com.example.sudhanshu.psetconnect;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +37,12 @@ public class MainActivity extends CustomListIndex {
 
     private Button backButton;
     private Button button;
-    private  Button logout;
-
-
+    private Button logout;
 
 
     private ListView booksLV;
+
+    private static Button resultButton;
 
     private UserListAdapter userListAdapter;
 
@@ -46,7 +52,9 @@ public class MainActivity extends CustomListIndex {
         setContentView(R.layout.activity_main);
 
 
-        booksLV = (ListView)findViewById(R.id.booksLV);
+
+        resultButton = (Button) findViewById(R.id.result_button);
+        booksLV = (ListView) findViewById(R.id.booksLV);
         selectedIndex = (TextView) findViewById(R.id.selectedIndex);
         allClasses = TextParser.textParserForSubClasses(getApplicationContext(), "SP15.txt");
 
@@ -68,17 +76,49 @@ public class MainActivity extends CustomListIndex {
         final ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
             loadLoginView();
-        }
-        else{
-           if (!currentUser.getBoolean("emailVerified")){
+        } else {
+            if (!currentUser.getBoolean("emailVerified")) {
 
-               Intent intent = new Intent(this, NotVerified.class);
-               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-               startActivity(intent);
-           };
+                Intent intent = new Intent(this, NotVerified.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+            installation.put("user", ParseUser.getCurrentUser().getEmail());
+            installation.saveInBackground();
         }
 
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ResultActivity.class);
+                startActivity(i);
+            }
+        });
+
+        ParsePush.subscribeInBackground("", new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
+                } else {
+                    Log.e("com.parse.push", "failed to subscribe for push", e);
+                }
+            }
+        });
+
+        logout = (Button) findViewById(R.id.button2);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                loadLoginView();
+
+            }
+        });
         /*
         listViewForClass = (ListView) findViewById(R.id.listView);
         listViewForSubClass = (ListView) findViewById(R.id.listView2);
@@ -253,11 +293,27 @@ public class MainActivity extends CustomListIndex {
             String temp = booksVector.get(i);
             //Insert the alphabets
             idx1 = (temp.substring(0, temp.indexOf("."))).toLowerCase();
-            if(!idx1.equalsIgnoreCase(idx2))
-            {
-                v.add(idx1.toUpperCase());
-                idx2 = idx1;
-                dealList.add(i);
+            if (idx1.startsWith("21")) {
+                idx1 = "21";
+                if (!idx1.equalsIgnoreCase(idx2)) {
+                    v.add(idx1.toUpperCase());
+                    idx2 = idx1;
+                    dealList.add(i);
+                }
+            } else if (Character.isLetter(temp.charAt(0))) {
+                idx1 = "A-Z";
+                if (!idx1.equalsIgnoreCase(idx2)) {
+                    v.add(idx1.toUpperCase());
+                    idx2 = idx1;
+                    dealList.add(i);
+                }
+            } else {
+                if (!idx1.equalsIgnoreCase(idx2)) {
+                    v.add(idx1.toUpperCase());
+                    idx2 = idx1;
+                    dealList.add(i);
+                }
+
             }
             v.add(temp);
         }
@@ -299,7 +355,6 @@ public class MainActivity extends CustomListIndex {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
 
 
     @Override

@@ -114,26 +114,42 @@ public class UserListAdapter extends BaseAdapter {
                                         final int groupSize = Integer.parseInt(((AlertDialog) dialog).getListView().getItemAtPosition(selectedPosition).toString());
                                         final String emailId = ParseUser.getCurrentUser().getEmail();
                                         final String matches = "Still Searching";
-                                        HashMap<String, Object> params = new HashMap<String, Object>();
+                                        final HashMap<String, Object> params = new HashMap<String, Object>();
 
                                         params.put("Class", mitClass);
                                         params.put("GroupSize", groupSize);
                                         params.put("UserID", emailId);
                                         params.put("Matches", matches);
 
+
                                         ParseCloud.callFunctionInBackground("Delete", params, new FunctionCallback<String>() {
                                             public void done(String result, ParseException e) {
                                                 if (e == null) {
                                                     //Deleted
-                                                    testObject.put("UserID", emailId);
-                                                    testObject.put("Class", mitClass);
-                                                    testObject.put("GroupSize", groupSize);
-                                                    testObject.put("Matches", matches);
-                                                    testObject.saveInBackground();
+                                                    Log.i("PARSE", "Delted!");
+
+                                                  testObject.put("UserID", emailId);
+                                                   testObject.put("Class", mitClass);
+                                                   testObject.put("GroupSize", groupSize);
+                                                   testObject.put("Matches", matches);
+                                                   testObject.saveInBackground();
+
                                                     Log.i("PARSE ", "Sent to Parse!!");
-                                                }
+
+                                                    ParseCloud.callFunctionInBackground("Match", params, new FunctionCallback<String>() {
+                                                        public void done(String result, ParseException e) {
+                                                            if (e == null) {
+                                                                //Deleted
+                                                                Log.i("PARSE ", result);
+                                                            }
+                                                        }
+                                                    });
+                                               }
                                             }
                                         });
+
+
+
 
 
                                         Toast.makeText(activity, "Requested Group Size " + groupSize + " For Class " + mitClass, Toast.LENGTH_LONG).show();
