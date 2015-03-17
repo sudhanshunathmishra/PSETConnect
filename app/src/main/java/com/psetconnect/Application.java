@@ -1,14 +1,12 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 /**
  * Created by sudhanshu on 3/4/15.
  */
 
     import com.parse.Parse;
-    import com.parse.ParseObject;
-    import com.parse.ParseUser;
 
-    public class Application extends android.app.Application {
+public class Application extends android.app.Application {
 
         public void onCreate() {
             Parse.enableLocalDatastore(this);

@@ -7,19 +7,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SignUpActivity"
-    android:backgroundTint="#ff000000"
-    android:background="#f9000000">
+    android:background="@drawable/login_background">
 
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:ems="10"
         android:hint="Enter Your Kerberos"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false">
+        android:layout_alignParentRight="false"
+        android:layout_above="@+id/passwordField">
 
         <requestFocus />
     </EditText>
@@ -28,20 +28,23 @@
         android:id="@+id/passwordField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/usernameField"
-        android:layout_below="@+id/usernameField"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="Make A Password" />
+        android:hint="Make A Password"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign up"
-        android:layout_below="@+id/passwordField"
+        android:layout_alignBottom="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp" />
+        android:layout_marginBottom="197dp"
+        android:background="@drawable/login_button_selector"
+        android:textSize="28sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,8 +52,7 @@
         android:text="\@mit.edu"
         android:id="@+id/textView2"
         android:textSize="24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/usernameField"
+        android:layout_alignTop="@+id/usernameField" />
 
 </RelativeLayout>

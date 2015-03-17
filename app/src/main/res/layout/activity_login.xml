@@ -33,7 +33,7 @@
         android:hint="Enter Your Password"
         android:textColorHint="#FFFFFF"
         android:inputType="textPassword"
-        android:layout_above="@+id/signUpText"
+        android:layout_above="@+id/loginButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="0dp" />
@@ -42,12 +42,11 @@
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don&apos;t Have An Account? Sign up!"
-        android:textSize="15dp"
+        android:text="JOIN HERE"
+        android:textSize="16sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:layout_marginTop="130dp" />
+        android:layout_marginBottom="60dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome To PSET Connect"
+        android:text="Welcome To Swyf"
         android:id="@+id/psetConnectTextView"
         android:elegantTextHeight="false"
         android:textSize="25dp"
@@ -104,6 +103,17 @@
         android:paddingTop="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/passwordField" />
+        android:layout_above="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Not Part Of The Network Yet?"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="false"
+        android:layout_above="@+id/signUpText"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal" />
 
 </RelativeLayout>

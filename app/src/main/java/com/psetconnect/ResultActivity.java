@@ -1,25 +1,17 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
-import android.app.ActionBar;
-import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.parse.FunctionCallback;
-import com.parse.Parse;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,10 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
-
-import javax.xml.transform.Result;
 
 
 public class ResultActivity extends ActionBarActivity {

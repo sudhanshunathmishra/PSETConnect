@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import android.app.Activity;
 import android.app.AlertDialog;

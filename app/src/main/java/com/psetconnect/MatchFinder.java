@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import java.util.ArrayList;
 import java.util.List;

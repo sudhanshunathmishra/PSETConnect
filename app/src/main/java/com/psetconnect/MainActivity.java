@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import android.content.Intent;
 import android.os.Bundle;

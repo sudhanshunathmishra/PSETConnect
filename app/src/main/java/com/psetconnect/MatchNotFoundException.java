@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 /**
  * Created by sudhanshu on 3/2/15.

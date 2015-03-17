@@ -1,7 +1,8 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +12,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.Parse;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -29,6 +29,8 @@ public class SignUpActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         usernameEditText = (EditText)findViewById(R.id.usernameField);
         passwordEditText = (EditText)findViewById(R.id.passwordField);

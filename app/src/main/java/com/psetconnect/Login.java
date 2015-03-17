@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
@@ -40,7 +41,7 @@ public class Login extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        setContentView(R.layout.activity_login2);
+        setContentView(R.layout.activity_login);
 
         signUpTextView = (TextView)findViewById(R.id.signUpText);
         usernameEditText = (EditText)findViewById(R.id.usernameField);
@@ -65,7 +66,9 @@ public class Login extends ActionBarActivity {
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    loginButton.performClick();
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(usernameEditText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
                 }
                 return false;
             }
@@ -126,6 +129,14 @@ public class Login extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
     @Override

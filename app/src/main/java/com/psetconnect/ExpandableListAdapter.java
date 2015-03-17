@@ -1,4 +1,4 @@
-package com.example.sudhanshu.psetconnect;
+package com.psetconnect;
 
 import android.graphics.Color;
 import android.widget.BaseExpandableListAdapter;
@@ -10,7 +10,6 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 /**
  * Created by sudhanshu on 3/16/15.
