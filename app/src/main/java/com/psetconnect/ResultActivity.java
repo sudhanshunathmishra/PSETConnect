@@ -1,5 +1,6 @@
 package com.psetconnect;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,6 @@ import java.util.TreeMap;
 
 public class ResultActivity extends ActionBarActivity {
 
-
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -36,7 +36,8 @@ public class ResultActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         final String emailId = ParseUser.getCurrentUser().getEmail();
 
@@ -50,7 +51,6 @@ public class ResultActivity extends ActionBarActivity {
                 if (e == null) {
                     Log.i("PARSE", pList.get(0).getUpdatedAt().getClass().getName());
                     Log.i("PARSE", ""+pList.size());
-
 
                     // preparing list data
 
