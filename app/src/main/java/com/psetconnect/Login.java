@@ -2,10 +2,12 @@ package com.psetconnect;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,12 +19,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 import com.parse.ParseException;
+import com.parse.RequestPasswordResetCallback;
 
 
 public class Login extends ActionBarActivity {
@@ -30,6 +34,8 @@ public class Login extends ActionBarActivity {
     protected EditText usernameEditText;
     protected EditText passwordEditText;
     protected Button loginButton;
+
+    protected TextView forgotPassword;
 
     protected TextView signUpTextView;
 
@@ -45,6 +51,7 @@ public class Login extends ActionBarActivity {
         setContentView(R.layout.activity_login);
 
         signUpTextView = (TextView) findViewById(R.id.signUpText);
+        forgotPassword = (TextView)findViewById(R.id.textView2);
         usernameEditText = (EditText) findViewById(R.id.usernameField);
         passwordEditText = (EditText) findViewById(R.id.passwordField);
         loginButton = (Button) findViewById(R.id.loginButton);
@@ -83,6 +90,67 @@ public class Login extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        forgotPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(forgotPassword.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText input = new EditText(Login.this);
+
+
+                new AlertDialog.Builder(Login.this)
+                        .setTitle("Password Recovery")
+                        .setMessage("Enter Your Kerberos For Recovery Link")
+                        .setView(input)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Editable value = input.getText();
+                                int indexOfAt = value.toString().indexOf("@");
+                                String text;
+                                if (indexOfAt == -1){
+                                     text = value.toString();
+                                }
+                                else{
+                                    text = value.toString().substring(0,indexOfAt);
+                                }
+                                ParseUser.requestPasswordResetInBackground(text,
+                                        new RequestPasswordResetCallback() {
+                                            public void done(ParseException e) {
+                                                if (e == null) {
+                                                    Toast.makeText(getApplicationContext(), "Email Sent",
+                                                            Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(), "Sorry. Couldn't Find You",
+                                                            Toast.LENGTH_LONG).show();
+                                                }
+                                              
+
+                                            }
+                                        });
+
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+
+
+            }
+        });
+
+
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
