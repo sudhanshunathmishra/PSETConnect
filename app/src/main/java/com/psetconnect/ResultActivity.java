@@ -73,6 +73,8 @@ public class ResultActivity extends ActionBarActivity {
 
                     // setting list adapter
                     expListView.setAdapter(listAdapter);
+                } else {
+                    Log.i("PARSE","ELSE");
                 }
 
            }

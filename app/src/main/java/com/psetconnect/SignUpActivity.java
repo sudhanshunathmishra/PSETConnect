@@ -32,10 +32,10 @@ public class SignUpActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        usernameEditText = (EditText)findViewById(R.id.usernameField);
-        passwordEditText = (EditText)findViewById(R.id.passwordField);
+        usernameEditText = (EditText) findViewById(R.id.usernameField);
+        passwordEditText = (EditText) findViewById(R.id.passwordField);
 
-        signUpButton = (Button)findViewById(R.id.signupButton);
+        signUpButton = (Button) findViewById(R.id.signupButton);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,21 +48,20 @@ public class SignUpActivity extends ActionBarActivity {
                 password = password.trim();
                 email = email.trim();
 
-                if (username.endsWith("@mit.edu")){
+                if (username.endsWith("@mit.edu")) {
                     email = username;
-                    username = username.substring(0,username.lastIndexOf("@"));
+                    username = username.substring(0, username.lastIndexOf("@"));
 
                 }
 
-                if (username.contains("@")||username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+                if (username.contains("@") || username.isEmpty() || password.isEmpty() || email.isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setMessage(R.string.signup_error_message)
                             .setTitle(R.string.signup_error_title)
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else {
+                } else {
                     setSupportProgressBarIndeterminate(true);
 
                     ParseUser newUser = new ParseUser();
@@ -77,12 +76,16 @@ public class SignUpActivity extends ActionBarActivity {
 
                             if (e == null) {
                                 // Success!
-                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                            }
-                            else {
+                                new AlertDialog.Builder(SignUpActivity.this)
+                                        .setTitle("Sign-Up")
+                                        .setMessage("Please check your MIT email for an activation link")
+                                        .setPositiveButton("OK", null)
+                                        .show();
+//                                Intent intent = new Intent(SignUpActivity.this, Login.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
+                            } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setMessage(e.getMessage())
                                         .setTitle(R.string.signup_error_title)
@@ -111,7 +114,7 @@ public class SignUpActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        
+
         return super.onOptionsItemSelected(item);
 
 

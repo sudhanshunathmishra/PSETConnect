@@ -9,6 +9,32 @@
     tools:context=".SignUpActivity"
     android:background="@drawable/login_background">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/hummingbird_alternative"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome To Swyf"
+        android:id="@+id/psetConnectTextView"
+        android:elegantTextHeight="false"
+        android:textSize="30sp"
+        android:layout_marginBottom="85dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/passwordField"
+        android:layout_alignEnd="@+id/passwordField"
+        android:gravity="center_vertical|center_horizontal" />
+
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="match_parent"
@@ -31,7 +57,8 @@
         android:ems="10"
         android:inputType="textPassword"
         android:hint="Make A Password"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="200dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -40,17 +67,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign up"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="197dp"
         android:background="@drawable/login_button_selector"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:layout_below="@+id/usernameField"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="54dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="\@mit.edu"
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:textSize="24dp"
         android:layout_alignEnd="@+id/usernameField"
         android:layout_alignTop="@+id/usernameField" />

@@ -4,12 +4,12 @@
         android:radius="10dp"
         />
     <gradient
-        android:gradientRadius="150"
+        android:gradientRadius="200"
         android:centerX="50%"
         android:centerY="60%"
         android:centerColor="#9C1616"
         android:startColor="#BA070D"
-        android:endColor="#750F24"
+        android:endColor="#A90F10"
         android:type="radial"
         />
     <padding

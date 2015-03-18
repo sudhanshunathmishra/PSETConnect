@@ -9,7 +9,9 @@
     tools:context=".LoginActivity"
     android:textAlignment="viewStart"
     android:touchscreenBlocksFocus="true"
-    android:background="@drawable/login_background">
+    android:background="@drawable/login_background"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
 
     <EditText
         android:id="@+id/usernameField"
@@ -66,8 +68,8 @@
         android:text="Welcome To Swyf"
         android:id="@+id/psetConnectTextView"
         android:elegantTextHeight="false"
-        android:textSize="25dp"
-        android:layout_marginBottom="97dp"
+        android:textSize="30sp"
+        android:layout_marginBottom="85dp"
         android:fontFamily="sans-serif-light"
         android:layout_above="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -75,16 +77,6 @@
         android:layout_alignRight="@+id/passwordField"
         android:layout_alignEnd="@+id/passwordField"
         android:gravity="center_vertical|center_horizontal" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/logo"
-        android:adjustViewBounds="true"
-        android:layout_marginBottom="38dp"
-        android:layout_above="@+id/psetConnectTextView"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/loginButton"
@@ -115,5 +107,14 @@
         android:layout_above="@+id/signUpText"
         android:layout_marginTop="50dp"
         android:gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/hummingbird_alternative"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="35dp" />
 
 </RelativeLayout>

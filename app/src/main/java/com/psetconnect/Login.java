@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 import com.parse.ParseException;
@@ -43,17 +44,17 @@ public class Login extends ActionBarActivity {
 
         setContentView(R.layout.activity_login);
 
-        signUpTextView = (TextView)findViewById(R.id.signUpText);
-        usernameEditText = (EditText)findViewById(R.id.usernameField);
-        passwordEditText = (EditText)findViewById(R.id.passwordField);
-        loginButton = (Button)findViewById(R.id.loginButton);
+        signUpTextView = (TextView) findViewById(R.id.signUpText);
+        usernameEditText = (EditText) findViewById(R.id.usernameField);
+        passwordEditText = (EditText) findViewById(R.id.passwordField);
+        loginButton = (Button) findViewById(R.id.loginButton);
 
         usernameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId,
                                           KeyEvent event) {
-                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                     InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     in.hideSoftInputFromWindow(usernameEditText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     return true;
@@ -73,7 +74,6 @@ public class Login extends ActionBarActivity {
                 return false;
             }
         });
-
 
 
         signUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +100,7 @@ public class Login extends ActionBarActivity {
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }
-                else {
+                } else {
                     setSupportProgressBarIndeterminateVisibility(true);
 
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -111,10 +110,24 @@ public class Login extends ActionBarActivity {
 
                             if (e == null) {
                                 // Success!
-                                Intent intent = new Intent(Login.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                final ParseUser currentUser = ParseUser.getCurrentUser();
+                                if (!currentUser.getBoolean("emailVerified")) {
+
+                                    new AlertDialog.Builder(Login.this)
+                                            .setTitle("Sign-Up")
+                                            .setMessage("Please check your MIT email for an activation link")
+                                            .setPositiveButton("OK", null)
+                                            .show();
+                                } else {
+                                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                                    installation.put("user", ParseUser.getCurrentUser().getEmail());
+                                    installation.saveInBackground();
+
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
                             } else {
                                 // Fail
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
@@ -133,7 +146,7 @@ public class Login extends ActionBarActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.
                 INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
@@ -142,7 +155,7 @@ public class Login extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
         return true;
     }

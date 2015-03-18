@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,19 +22,23 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
-public class UserListAdapter extends BaseAdapter {
+public class UserListAdapter extends BaseAdapter implements Filterable {
 
     private static final String TAG = UserListAdapter.class.getName();
     private Activity activity;
-    private ArrayList<String> items;
+    private List<String> items;
+    private List<String> originalData;
 
     public UserListAdapter(Activity activity,
                            ArrayList<String> items) {
         Log.i(TAG, TAG);
         this.activity = activity;
         this.items = items;
+        this.originalData = items;
     }
 
 
@@ -128,11 +134,11 @@ public class UserListAdapter extends BaseAdapter {
                                                     //Deleted
                                                     Log.i("PARSE", "Delted!");
 
-                                                  testObject.put("UserID", emailId);
-                                                   testObject.put("Class", mitClass);
-                                                   testObject.put("GroupSize", groupSize);
-                                                   testObject.put("Matches", matches);
-                                                   testObject.saveInBackground();
+                                                    testObject.put("UserID", emailId);
+                                                    testObject.put("Class", mitClass);
+                                                    testObject.put("GroupSize", groupSize);
+                                                    testObject.put("Matches", matches);
+                                                    testObject.saveInBackground();
 
                                                     Log.i("PARSE ", "Sent to Parse!!");
 
@@ -144,12 +150,9 @@ public class UserListAdapter extends BaseAdapter {
                                                             }
                                                         }
                                                     });
-                                               }
+                                                }
                                             }
                                         });
-
-
-
 
 
                                         Toast.makeText(activity, "Requested Group Size " + groupSize + " For Class " + mitClass, Toast.LENGTH_LONG).show();
@@ -173,6 +176,39 @@ public class UserListAdapter extends BaseAdapter {
     private static class ViewHolder {
         TextView name, headingTV;
         LinearLayout nameLL, headingLL;
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        return new Filter() {
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                items = (ArrayList<String>)results.values;  // copy the results to your original names and refresh list
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                ArrayList<String> resultNames = new ArrayList<>();
+
+                if (constraint != null && constraint.length() > 0) {
+                    constraint = constraint.toString().toUpperCase();
+                    for (String className : originalData) {
+                        if (className.startsWith(constraint.toString()))  // whatever search condition you need
+                            resultNames.add(className);
+                    }
+                } else {
+                    results.values = originalData;
+                    return results;
+                }
+
+                results.values = resultNames;
+                return results;
+            }
+        };
     }
 
     @Override

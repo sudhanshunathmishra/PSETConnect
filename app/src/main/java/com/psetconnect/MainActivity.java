@@ -1,13 +1,18 @@
 package com.psetconnect;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,7 +84,7 @@ public class MainActivity extends CustomListIndex {
         } else {
             if (!currentUser.getBoolean("emailVerified")) {
 
-                Intent intent = new Intent(this, NotVerified.class);
+                Intent intent = new Intent(this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -89,6 +94,46 @@ public class MainActivity extends CustomListIndex {
             installation.saveInBackground();
         }
 
+        searchText = (EditText) findViewById(R.id.searchBar);
+
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    searchText.clearFocus();
+                    return true;
+
+                }
+                return false;
+            }
+        });
+
+        searchText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+
+
+                MainActivity.this.userListAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         resultButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +174,7 @@ public class MainActivity extends CustomListIndex {
         arrayAdapterForAllClasses = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listOfAllClasses);
 
         listViewForClass.setAdapter(arrayAdapterForAllClasses);
-        searchText = (EditText) findViewById(R.id.editText);
+
 
         ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override
