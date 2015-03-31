@@ -3,8 +3,10 @@ package com.psetconnect;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -44,7 +46,7 @@ public class UserListAdapter extends BaseAdapter implements Filterable {
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        ViewHolder holder;
+        final ViewHolder holder;
 
         if (convertView == null) {
 
@@ -78,12 +80,15 @@ public class UserListAdapter extends BaseAdapter implements Filterable {
                 holder.headingLL.setVisibility(View.GONE);
                 holder.name.setText(mitClass.toString());
 
-                View ll = (LinearLayout) holder.name.getParent();
+                final View ll = (LinearLayout) holder.name.getParent();
                 ll.setFocusable(true);
                 ll.setSelected(true);
+
+
                 ll.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                       ll.setBackgroundColor(android.R.color.transparent);
                         final CharSequence[] items = {"2", "5"};
                         final int listPosition = position;
                         final ParseObject testObject = new ParseObject("Query");
@@ -108,14 +113,14 @@ public class UserListAdapter extends BaseAdapter implements Filterable {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // if this button is clicked, close
                                         // current activity
+                                        ll.setBackgroundColor(Color.WHITE);
                                     }
                                 })
                                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // if this button is clicked, close
                                         // current activity
-
-
+                                        ll.setBackgroundColor(Color.WHITE);
                                         int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
                                         final int groupSize = Integer.parseInt(((AlertDialog) dialog).getListView().getItemAtPosition(selectedPosition).toString());
                                         final String emailId = ParseUser.getCurrentUser().getEmail();

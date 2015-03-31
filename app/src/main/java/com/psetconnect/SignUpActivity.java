@@ -81,10 +81,10 @@ public class SignUpActivity extends ActionBarActivity {
                                         .setMessage("Please check your MIT email for an activation link")
                                         .setPositiveButton("OK", null)
                                         .show();
-//                                Intent intent = new Intent(SignUpActivity.this, Login.class);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                startActivity(intent);
+                                Intent intent = new Intent(SignUpActivity.this, Login.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                                 builder.setMessage(e.getMessage())
